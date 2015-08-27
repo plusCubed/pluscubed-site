@@ -83,22 +83,22 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         </paper-toolbar>
 
         <!-- Drawer Content -->
-        <paper-menu class="list" selected="{{route}}" attr-for-selected="data-route" on-iron-select="onMenuSelect">
+        <paper-menu class="list" attr-for-selected="data-route" selected="{{route}}">
 
-          <a data-route="home" href="/">
+          <a data-route="home" href="/" on-click="onDataRouteClick">
             <iron-icon icon="home"></iron-icon>
             <span>Home</span>
             <paper-ripple></paper-ripple>
           </a>
 
 
-          <a data-route="apps" href="/apps">
+          <a data-route="apps" href="/apps" on-click="onDataRouteClick">
             <iron-icon icon="apps"></iron-icon>
             <span>Apps</span>
             <paper-ripple></paper-ripple>
           </a>
 
-          <a data-route="videos" href="/videos">
+          <a data-route="videos" href="/videos" on-click="onDataRouteClick">
             <iron-icon icon="av:video-library"></iron-icon>
             <span>Videos</span>
             <paper-ripple></paper-ripple>
@@ -331,17 +331,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <!-- Uncomment next block to enable Service Worker support (1/2) -->
     <!--
     <paper-toast id="caching-complete"
-    duration="6000"
-    text="Caching complete! This app will work offline.">
+                 duration="6000"
+                 text="Caching complete! This app will work offline.">
     </paper-toast>
 
     <platinum-sw-register auto-register
-    clients-claim
-    skip-waiting
-    on-service-worker-installed="displayInstalledToast">
-    <platinum-sw-cache default-cache-strategy="networkFirst"
-    precache-file="precache.json">
-    </platinum-sw-cache>
+                          clients-claim
+                          skip-waiting
+                          on-service-worker-installed="displayInstalledToast">
+      <platinum-sw-cache default-cache-strategy="fastest"
+                         cache-config-file="cache-config.json">
+      </platinum-sw-cache>
     </platinum-sw-register>
     -->
 

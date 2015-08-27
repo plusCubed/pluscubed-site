@@ -16,7 +16,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   var app = document.querySelector('#app');
 
   app.displayInstalledToast = function() {
-    document.querySelector('#caching-complete').show();
+    // Check to make sure caching is actually enabled—it won't be in the dev environment.
+    if (!document.querySelector('platinum-sw-cache').disabled) {
+      document.querySelector('#caching-complete').show();
+    }
   };
 
   // Listen for template bound event to know when bindings
@@ -35,12 +38,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   // The appName is moved to top and shrunk on condensing. The bottom sub title
   // is shrunk to nothing on condensing.
   addEventListener('paper-header-transform', function(e) {
-    var appName = document.querySelector('.app-name');
-    var middleContainer = document.querySelector('.middle-container');
-    var bottomContainer = document.querySelector('.bottom-container');
+    var appName = document.querySelector('#mainToolbar .app-name');
+    var middleContainer = document.querySelector('#mainToolbar .middle-container');
+    var bottomContainer = document.querySelector('#mainToolbar .bottom-container');
     var detail = e.detail;
     var heightDiff = detail.height - detail.condensedHeight;
-    var yRatio = Math.min(1, detail.y / heightDiff *3/2);
+    var yRatio = Math.min(1, detail.y / heightDiff * 3/2);
     var maxMiddleScale = 0.50;  // appName max size when condensed. The smaller the number the smaller the condensed size.
     var scaleMiddle = Math.max(maxMiddleScale, (heightDiff - detail.y) / (heightDiff / (1-maxMiddleScale))  + maxMiddleScale);
     var scaleBottom = 1 - yRatio;
@@ -66,14 +69,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   });
 
   // Close drawer after menu item is selected if drawerPanel is narrow
-  app.onMenuSelect = function() {
+  app.onDataRouteClick = function() {
     var drawerPanel = document.querySelector('#paperDrawerPanel');
     if (drawerPanel.narrow) {
       drawerPanel.closeDrawer();
     }
+  };
 
-    var header = document.querySelector('.paper-scroll-header-panel');
-    header.scrollTop=0;
+  // Scroll page to top and expand header
+  app.scrollPageToTop = function() {
+    document.getElementById('mainContainer').scrollTop = 0;
   };
 
 })(document);
