@@ -44,7 +44,7 @@ var styleTask = function (stylesPath, srcs) {
     .pipe($.changed(stylesPath, {extension: '.css'}))
     .pipe($.autoprefixer(AUTOPREFIXER_BROWSERS))
     .pipe(gulp.dest('.tmp/' + stylesPath))
-    .pipe($.if('*.css', $.cssmin()))
+    .pipe($.cssmin())
     .pipe(gulp.dest('dist/' + stylesPath))
     .pipe($.size({title: stylesPath}));
 };
@@ -63,7 +63,8 @@ gulp.task('jshint', function () {
   return gulp.src([
       'app/scripts/**/*.js',
       'app/elements/**/*.js',
-      'app/elements/**/*.html'
+      'app/elements/**/*.html',
+      'gulpfile.js'
     ])
     .pipe(reload({stream: true, once: true}))
     .pipe($.jshint.extract()) // Extract JS from .html files

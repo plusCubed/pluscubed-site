@@ -15,19 +15,24 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     // We use Page.js for routing. This is a Micro
     // client-side router inspired by the Express router
     // More info: https://visionmedia.github.io/page.js/
-    page('/', function () {
+
+    // Middleware
+    function scrollToTop(ctx, next) {
+      app.scrollPageToTop();
+      next();
+    }
+
+    // Routes
+    page('/', scrollToTop, function() {
       app.route = 'home';
-      app.scrollPageToTop();
     });
 
-    page('/apps', function () {
+    page('/apps', scrollToTop, function () {
       app.route = 'apps';
-      app.scrollPageToTop();
     });
 
-    page('/videos', function () {
+    page('/videos', scrollToTop, function () {
       app.route = 'videos';
-      app.scrollPageToTop();
     });
 
     // add #! before urls
