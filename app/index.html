@@ -87,9 +87,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         </paper-toolbar>
 
         <!-- Drawer Content -->
-        <paper-menu class="list" attr-for-selected="data-route" selected="{{route}}">
-
-          <a data-route="home" href="/" on-click="onDataRouteClick">
+        <paper-menu class="list" attr-for-selected="data-route" selected="[[route]]">
+          <a data-route="home" href="/" on-tap="onDataRouteClick">
             <iron-icon icon="home"></iron-icon>
             <span>Home</span>
             <paper-ripple></paper-ripple>
@@ -112,7 +111,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       </paper-scroll-header-panel>
 
       <!-- Main Area -->
-      <paper-scroll-header-panel main condenses keep-condensed-header>
+      <paper-scroll-header-panel main id="headerPanelMain" condenses keep-condensed-header>
 
         <!-- Main Toolbar -->
         <paper-toolbar id="mainToolbar" class="tall shadow-transition">
@@ -151,24 +150,27 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
               <div class="horizontal layout col2">
                 <paper-material elevation="1" class="flex col-1">
-                  <div class="paper-font-body1">
-                    Google+: <a href="https://plus.google.com/u/0/111295988877938068140/posts"><paper-button>+Daniel Ciao</paper-button></a><br/>
-                    Twitter: <a href="https://twitter.com/plusCubed"><paper-button>@plusCubed</paper-button></a>
+                  <div class="paper-font-body1 center-content">
+                    <img src="./images/g+.png" style="padding-right:8px"/><a href="https://plus.google.com/u/0/111295988877938068140/posts"><paper-button>+Daniel Ciao</paper-button></a>
                   </div>
-
+                  <div class="paper-font-body1 center-content">
+                    <img src="./images/twi.png" style="padding-right:8px"/><a href="https://twitter.com/plusCubed"><paper-button>@plusCubed</paper-button></a>
+                  </div>
                 </paper-material>
 
                 <paper-material elevation="1" class="flex col-2">
-                  <div class="paper-font-body1">
-                    LinkedIn: <a href="http://www.linkedin.com/pub/daniel-ciao/a4/568/b93/"><paper-button>Daniel Ciao</paper-button></a><br/>
-                    GitHub: <a href="https://github.com/plusCubed"><paper-button>plusCubed</paper-button></a>
+                  <div class="paper-font-body1 center-content">
+                    <img src="./images/linked.png" style="padding-right:8px"/><a href="http://www.linkedin.com/pub/daniel-ciao/a4/568/b93/"><paper-button>Daniel Ciao</paper-button></a>
+                  </div>
+                  <div class="paper-font-body1 center-content">
+                    <img src="./images/github.png" style="padding-right:8px"/><a href="https://github.com/plusCubed"><paper-button>plusCubed</paper-button></a>
                   </div>
                 </paper-material>
               </div>
 
               <paper-material elevation="1">
-                <div class="paper-font-body1">
-                  Email: <a href="mailto:plusCubed@gmail.com"><paper-button>plusCubed@gmail.com</paper-button></a><br/>
+                <div class="paper-font-body1 center-content">
+                  <img src="./images/gmail.png" style="padding-right:8px"/><a href="mailto:plusCubed@gmail.com"><paper-button>plusCubed@gmail.com</paper-button></a><br/>
                 </div>
               </paper-material>
 
@@ -184,8 +186,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     <div class="app-desc paper-font-body1">
                       <p>An Android Rubik's cube solve timer.</p>
                       <p><a href="https://play.google.com/store/apps/details?id=com.pluscubed.plustimer">
-                        <img alt="Get it on Google Play"
-                        src="./images/en_generic_rgb_wo_60.png" />
+                        <img alt="Get it on Google Play" src="./images/en_generic_rgb_wo_60.png" />
                       </a></p>
                       <a href="https://www.speedsolving.com/forum/showthread.php?46893"><paper-button>SpeedSolving Thread</paper-button></a>
                       <a href="https://github.com/plusCubed/plusTimer"><paper-button>GitHub Repo</paper-button></a>
@@ -196,7 +197,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     <p class="paper-font-title">MatLog</p>
                     <img src="./images/matlog-feature.png" class="app-feat"></img>
                     <div class="app-desc paper-font-body1">
-                      <p>A Material Design logcat reader based on Nolan Lawson's CatLog. Join the Google+ Community to beta-test and download:</p>
+                      <p>A Material Design logcat reader based on Nolan Lawson's CatLog.</p>
                       <p><a href="https://plus.google.com/u/0/communities/108705871773878445106">
                         <img alt="Get it on Google Play"
                         src="./images/en_generic_rgb_wo_60.png" />
@@ -209,7 +210,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     <p class="paper-font-title">MVHS App</p>
                     <img src="./images/mvhs-app-feature.png" class="app-feat">
                     <div class="app-desc paper-font-body1">
-                      <p>Provides useful tools to Mountain View High School students, parents, and guests, such as the school map (with turn-by-turn directions), schedule, grades, etc.</p>
+                      <p>Provides useful tools to Mountain View High School students, parents, and guests, such as a backend-updated bell schedule and class schedule display, an interactive school map, access to SIS grades, etc.</p>
                       <p>I'm the lead developer for this all-in-one app. Other members of the CS club at our school work on individual parts of the app.</p>
                       <p><a href="https://play.google.com/store/apps/details?id=net.mvla.mvhs">
                         <img alt="Get it on Google Play" src="./images/en_generic_rgb_wo_60.png">
@@ -219,9 +220,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                   </paper-material>
 
                   <paper-material elevation="1" class="app">
-                    <p class="paper-font-title">Mountain View Public Art</p>
+                    <p class="paper-font-title">MaterialOS Icon Pack Dashboard</p>
+                    <img src="./images/materialos-feature.png" class="app-feat"></img>
                     <div class="app-desc paper-font-body1">
-                      <p>An Android app showing the locations (on a map) and information of Mountain View's public art. This is worked on in collaboration with the Mountain View city, which will provide the data and backend.</p>
+                      <p>An Android icon pack dashboard for the Material Open Source Project. The project itself aims to be the central place for designers from all over the world to contribute Material Design icons, wallpapers, and more.</p>
+                      <p><a href="https://play.google.com/store/apps/details?id=org.materialos.icons">
+                        <img alt="Get it on Google Play"
+                        src="./images/en_generic_rgb_wo_60.png" />
+                      </a></p>
+                      <a href="https://github.com/materialos/Android-Icon-Pack"><paper-button>GitHub Repo for Dashboard</paper-button></a>
+                      <a href="https://github.com/materialos/Icons"><paper-button>GitHub Repo for Contributed Icons</paper-button></a>
                     </div>
                   </paper-material>
 
@@ -234,23 +242,42 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     </div>
                     <img src="./images/cabinet-impression-feature.png" class="app-feat"></img>
                     <div class="app-desc paper-font-body1">
-                      <p>I'm helping out with development for some of Aidan's projects, including:</p>
+                      <p>I help out with development for some of Aidan's projects, including:</p>
 
-                      <p class="paper-font-body2">Cabinet: Android file manager<br/>
+                      <p class="paper-font-body2">Cabinet: File manager<br/>
                         <a href="https://play.google.com/store/apps/details?id=com.afollestad.cabinet">
-                          <img alt="Get it on Google Play"
-                          src="./images/en_generic_rgb_wo_45.png" />
+                          <img alt="Get it on Google Play" src="./images/en_generic_rgb_wo_45.png" />
                         </a>
                       </p>
 
+                      <p class="paper-font-body2" style="margin-bottom: 0px; overflow:hidden">Photo Affix: <br/>Easy-to-use app for affixing (affixing) photos<br/>
 
-                      <p class="paper-font-body2">Impression: Android gallery (dev halted, open sourced)<br/>
+                      </p>
+                      <div class="center-content" style="padding-bottom: 12px">
+                        <a href="https://play.google.com/apps/testing/com.afollestad.photoaffix" style="text-decoration:none;line-height: 0px">
+                          <img alt="Get it on Google Play" src="./images/en_generic_rgb_wo_45.png" />
+                        </a>
+                        <a href="https://github.com/afollestad/photo-affix"><paper-button>GitHub Repo</paper-button></a>
+                      </div>
+
+                      <p class="paper-font-body2">Impression: Gallery app<br/>(development halted, open sourced)<br/>
                         <a href="https://github.com/afollestad/impression"><paper-button>GitHub Repo</paper-button></a>
                       </p>
 
                       <p class="paper-font-body2">Material Dialogs: <br/>Android library for creating Material Design dialogs<br/>
                         <a href="https://github.com/afollestad/material-dialogs"><paper-button>GitHub Repo</paper-button></a>
                       </p>
+
+
+                    </div>
+                  </paper-material>
+
+                  <paper-material elevation="1" class="app">
+                    <p class="paper-font-title">Recycler Fast Scroll</p>
+                    <img src="./images/recycler-fast-scroll.gif" style="margin:auto;display:block;height:300px"/>
+                    <div class="app-desc paper-font-body1">
+                      <p>Library with widget for RecyclerView fast scrolling, like Android's built-in fast scroll option for ListView.</p>
+                      <a href="https://github.com/plusCubed/recycler-fast-scroll"><paper-button>GitHub Repo</paper-button></a>
                     </div>
                   </paper-material>
 
@@ -268,18 +295,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                   </paper-material>
 
                   <paper-material elevation="1" class="app">
-                    <p class="paper-font-title">MaterialOS Icon Pack Dashboard</p>
-                    <img src="./images/materialos-feature.png" class="app-feat"></img>
+                    <p class="paper-font-title">Mountain View Public Art</p>
                     <div class="app-desc paper-font-body1">
-                      <p>An Android icon pack dashboard for the Material Open Source Project. The project itself aims to be the central place for designers from all over the world to contribute Material Design icons, wallpapers, and more.</p>
-                      <p><a href="https://play.google.com/store/apps/details?id=org.materialos.icons">
-                        <img alt="Get it on Google Play"
-                        src="./images/en_generic_rgb_wo_60.png" />
-                      </a></p>
-                      <a href="https://github.com/materialos/Android-Icon-Pack"><paper-button>GitHub Repo for Dashboard</paper-button></a>
-                      <a href="https://github.com/materialos/Icons"><paper-button>GitHub Repo for Contributed Icons</paper-button></a>
+                      <p>An Android app showing the locations (on a map) and information of Mountain View's public art. This is worked on in collaboration with the Mountain View city, which will provide the data and backend.</p>
                     </div>
                   </paper-material>
+
+
                 </div>
               </div>
 
@@ -297,7 +319,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                       <a class="title-button" href="https://www.youtube.com/user/screwcontinuityinc"><paper-button>Screw Continuity Film Channel</paper-button></a>
                     </div>
                     <div class="embed-container"style="">
-                      <!-- <iframe class="embed" src="https://www.youtube.com/embed/hiS97OQLXk4" frameborder="0" allowfullscreen></iframe> -->
+                      <iframe class="embed" src="https://www.youtube.com/embed/hiS97OQLXk4" frameborder="0" allowfullscreen></iframe>
                     </div>
                     <div class="app-desc paper-font-body1">
                       <p>Collaboration film channel with Zak at <a href="http://zakriya.com">zakriya.com</a></p>
@@ -310,7 +332,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                       <a class="title-button" href="http://www.youtube.com/channel/UCbq6R9YT4Xk1EnBwbyW44Pg"><paper-button>Personal Random Stuff Channel</paper-button></a>
                     </div>
                     <div class="embed-container"style="">
-                      <!-- <iframe class="embed" src="https://www.youtube.com/embed/qXLAD3hWmW0" frameborder="0" allowfullscreen></iframe> -->
+                      <iframe class="embed" src="https://www.youtube.com/embed/qXLAD3hWmW0" frameborder="0" allowfullscreen></iframe>
                     </div>
                     <div class="app-desc paper-font-body1">
                       <p>This video in particular was winner of the Committee's Choice Award of GreenLight Festival 2014. This video was also a collaboration with Zak.</a></p>
@@ -327,7 +349,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                       <a class="title-button" href="https://www.youtube.com/user/plusCubed/"><paper-button>plusCubed SpeedCubing Channel</paper-button></a>
                     </div>
                     <div class="embed-container"style="">
-                      <!-- <iframe class="embed" src="https://www.youtube.com/embed/5FjLuY1_zMc?list=UUmlYKILzgS5l8geUzkSOF2g" frameborder="0" allowfullscreen></iframe> -->
+                      <iframe class="embed" src="https://www.youtube.com/embed/5FjLuY1_zMc?list=UUmlYKILzgS5l8geUzkSOF2g" frameborder="0" allowfullscreen></iframe>
                     </div>
                     <div class="app-desc paper-font-body1">
                       <p>Reviews, solves, etc. on all things Rubik's cubes.</a></p>
@@ -344,6 +366,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         </div>
       </paper-scroll-header-panel>
     </paper-drawer-panel>
+
+    <paper-toast id="toast" duration="6000">
+      <span class="toast-hide-button" role="button" tabindex="0" onclick="app.$.toast.hide()">OK</span>
+    </paper-toast>
 
     <!-- Uncomment next block to enable Service Worker support (1/2) -->
     <!--
