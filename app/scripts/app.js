@@ -43,19 +43,21 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     var bottomContainer = Polymer.dom(document).querySelector('#mainToolbar .bottom-container');
     var detail = e.detail;
     var heightDiff = detail.height - detail.condensedHeight;
-    var yRatio = Math.min(1, detail.y / heightDiff * 3/2);
-    var maxMiddleScale = 0.50;  // appName max size when condensed. The smaller the number the smaller the condensed size.
-    var scaleMiddle = Math.max(maxMiddleScale, (heightDiff - detail.y) / (heightDiff / (1-maxMiddleScale))  + maxMiddleScale);
+    var yRatio = Math.min(1, detail.y / heightDiff);
+    // appName max size when condensed. The smaller the number the smaller the condensed size.
+    var maxMiddleScale = 0.50;
+    var auxHeight = heightDiff - detail.y;
+    var auxScale = heightDiff / (1 - maxMiddleScale);
+    var scaleMiddle = Math.max(maxMiddleScale, auxHeight / auxScale + maxMiddleScale);
     var scaleBottom = 1 - yRatio;
 
-    if(detail.y>=heightDiff){
+    if (detail.y >= heightDiff) {
       document.getElementById('mainToolbar').className += ' shadow-elevation-4dp';
-      appName.innerHTML='plusCubed - Daniel Ciao';
-    }else{
-      document.getElementById('mainToolbar').className =
+      appName.innerHTML = 'plusCubed - Daniel Ciao';
+    } else {
       document.getElementById('mainToolbar').className.replace
-        ( /(?:^|\s)shadow-elevation-4dp(?!\S)/g , '' );
-      appName.innerHTML='plusCubed';
+      (/(?:^|\s)shadow-elevation-4dp(?!\S)/g , '');
+      appName.innerHTML = 'plusCubed';
     }
 
     // Move/translate middleContainer

@@ -27,16 +27,21 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       app.route = 'home';
     });
 
-    page('/apps', scrollToTop, function () {
+    page('/apps', scrollToTop, function() {
       app.route = 'apps';
     });
 
-    page('/videos', scrollToTop, function () {
+    page('/projects', scrollToTop, function() {
+      app.route = 'apps';
+    });
+
+    page('/videos', scrollToTop, function() {
       app.route = 'videos';
     });
 
     page('*', function() {
-      app.$.toast.text = 'Can\'t find \"' + window.location.href  + '\". Redirected you to the home page';
+      app.$.toast.text = 'Can\'t find \"' +
+        window.location.href  + '\". Redirected you to the home page';
       app.$.toast.show();
       page.redirect('/');
     });
@@ -47,4 +52,5 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     });
 
   });
+
 </script>
