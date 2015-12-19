@@ -23,6 +23,7 @@ var glob = require('glob-all');
 var historyApiFallback = require('connect-history-api-fallback');
 var packageJson = require('./package.json');
 var crypto = require('crypto');
+// var ghPages = require('gulp-gh-pages');
 
 var AUTOPREFIXER_BROWSERS = [
   'ie >= 10',
@@ -49,7 +50,7 @@ var styleTask = function(stylesPath, srcs) {
     .pipe($.changed(stylesPath, {extension: '.css'}))
     .pipe($.autoprefixer(AUTOPREFIXER_BROWSERS))
     .pipe(gulp.dest('.tmp/' + stylesPath))
-    .pipe($.cssmin())
+    .pipe($.minifyCss())
     .pipe(gulp.dest(dist(stylesPath)))
     .pipe($.size({title: stylesPath}));
 };
@@ -79,7 +80,7 @@ var optimizeHtmlTask = function(src, dest) {
     })))
     // Concatenate and minify styles
     // In case you are still using useref build blocks
-    .pipe($.if('*.css', $.cssmin()))
+    .pipe($.if('*.css', $.minifyCss()))
     .pipe(assets.restore())
     .pipe($.useref())
     // Minify any HTML
@@ -192,7 +193,6 @@ gulp.task('vulcanize', function() {
       inlineCss: true,
       inlineScripts: true
     }))
-    .pipe($.minifyInline())
     .pipe(gulp.dest(DEST_DIR))
     .pipe($.size({title: 'vulcanize'}));
 });
@@ -234,7 +234,7 @@ gulp.task('cache-config', function(callback) {
 
 // Clean output directory
 gulp.task('clean', function() {
-  return del(['.tmp', 'dist']);
+  return del(['.tmp', dist()]);
 });
 
 // Watch files for changes & reload
@@ -303,6 +303,26 @@ gulp.task('default', ['clean'], function(cb) {
     ['lint', 'images', 'fonts', 'html'],
     'vulcanize', // 'cache-config',
     cb);
+});
+
+// Build then deploy to GitHub pages gh-pages branch
+gulp.task('build-deploy-gh-pages', function(cb) {
+  runSequence(
+    'default',
+    'deploy-gh-pages',
+    cb);
+});
+
+// Deploy to GitHub pages gh-pages branch
+gulp.task('deploy-gh-pages', function() {
+  return gulp.src(dist('**/*'))
+    // Check if running task from Travis Cl, if so run using GH_TOKEN
+    // otherwise run using ghPages defaults.
+    .pipe($.if(process.env.TRAVIS === 'true', $.ghPages({
+      remoteUrl: 'https://$GH_TOKEN@github.com/polymerelements/polymer-starter-kit.git',
+      silent: true,
+      branch: 'gh-pages'
+    }), $.ghPages()));
 });
 
 // Load tasks for web-component-tester

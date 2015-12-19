@@ -15,6 +15,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   // Learn more about auto-binding templates at http://goo.gl/Dx1u2g
   var app = document.querySelector('#app');
 
+  // Sets app default base URL
+  app.baseUrl = '/';
+  if (window.location.port === '') {  // if production
+    // Uncomment app.baseURL below and
+    // set app.baseURL to '/your-pathname/' if running from folder in production
+    // app.baseUrl = '/polymer-starter-kit/';
+  }
+
   app.displayInstalledToast = function() {
     // Check to make sure caching is actually enabled—it won't be in the dev environment.
     if (!Polymer.dom(document).querySelector('platinum-sw-cache').disabled) {
@@ -51,12 +59,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     var scaleMiddle = Math.max(maxMiddleScale, auxHeight / auxScale + maxMiddleScale);
     var scaleBottom = 1 - yRatio;
 
+    var mainToolbar = document.getElementById('mainToolbar');
     if (detail.y >= heightDiff) {
-      document.getElementById('mainToolbar').className += ' shadow-elevation-4dp';
+      mainToolbar.className += ' shadow-elevation-4dp';
       appName.innerHTML = 'plusCubed - Daniel Ciao';
     } else {
-      document.getElementById('mainToolbar').className.replace
-      (/(?:^|\s)shadow-elevation-4dp(?!\S)/g , '');
+      mainToolbar.className =
+        mainToolbar.className.replace(/(?:^|\s)shadow-elevation-4dp(?!\S)/  , '');
       appName.innerHTML = 'plusCubed';
     }
 
@@ -70,17 +79,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     Polymer.Base.transform('scale(' + scaleMiddle + ') translateZ(0)', appName);
   });
 
-  // Close drawer after menu item is selected if drawerPanel is narrow
-  app.onDataRouteClick = function() {
-    var drawerPanel = Polymer.dom(document).querySelector('#paperDrawerPanel');
-    if (drawerPanel.narrow) {
-      drawerPanel.closeDrawer();
-    }
-  };
-
   // Scroll page to top and expand header
   app.scrollPageToTop = function() {
     app.$.headerPanelMain.scrollToTop(true);
+  };
+
+  app.closeDrawer = function() {
+    app.$.paperDrawerPanel.closeDrawer();
   };
 
 })(document);
