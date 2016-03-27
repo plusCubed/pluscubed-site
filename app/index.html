@@ -9,7 +9,7 @@ Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 -->
 
-<html lang="" itemscope itemtype="http://schema.org/Person">
+<html lang="en" itemscope itemtype="http://schema.org/Person">
 
 <head>
   <meta charset="utf-8">
@@ -64,17 +64,21 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
   <!-- endbuild -->
 
-  <!-- will be replaced with elements/elements.vulcanized.html -->
+  <!-- Because this project uses vulcanize this should be your only html import
+       in this file. All other imports should go in elements.html -->
   <link rel="import" href="elements/elements.html">
-  <!-- endreplace-->
 
   <!-- For shared styles, shared-styles.html import in elements.html -->
   <style is="custom-style" include="shared-styles"></style>
+  <style is="custom-style" include="iron-flex iron-flex-alignment"></style>
 
 </head>
 
-<body unresolved class="fullbleed layout vertical">
+<body unresolved>
+<!-- build:remove -->
   <span id="browser-sync-binding"></span>
+<!-- endbuild -->
+
   <template is="dom-bind" id="app">
 
     <paper-drawer-panel id="paperDrawerPanel">
@@ -83,11 +87,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
         <!-- Drawer Toolbar -->
         <paper-toolbar id="drawerToolbar">
-          <span class="paper-font-title">Menu</span>
+          <span class="menu-name">Menu</span>
         </paper-toolbar>
 
         <!-- Drawer Content -->
-        <paper-menu class="list" attr-for-selected="data-route" selected="[[route]]">
+        <paper-menu class="app-menu" attr-for-selected="data-route" selected="[[route]]">
           <a data-route="home" href="{{baseUrl}}">
             <iron-icon icon="home"></iron-icon>
             <span>Home</span>
@@ -112,11 +116,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       <!-- Main Area -->
       <paper-scroll-header-panel main id="headerPanelMain" condenses keep-condensed-header>
-
         <!-- Main Toolbar -->
         <paper-toolbar id="mainToolbar" class="tall shadow-transition">
           <paper-icon-button id="paperToggle" icon="menu" paper-drawer-toggle></paper-icon-button>
-          <span class="flex"></span>
+
+          <span class="space"></span>
 
           <!-- Toolbar icons -->
           <!-- <paper-icon-button icon="refresh">
@@ -125,22 +129,20 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           </paper-icon-button> -->
 
           <!-- Application name -->
-          <div class="middle middle-container center horizontal layout">
+          <div class="middle middle-container">
             <div class="app-name">plusCubed</div>
           </div>
 
           <!-- Application sub title -->
-          <div class="bottom bottom-container center horizontal layout">
+          <div class="bottom bottom-container">
             <div class="bottom-title paper-font-code2 subhead">Daniel Ciao</div>
           </div>
-
         </paper-toolbar>
 
         <!-- Main Content -->
         <div class="content flex">
           <iron-pages attr-for-selected="data-route" selected="{{route}}">
-
-            <section data-route="home">
+            <section data-route="home" tabindex="-1">
               <paper-material elevation="1">
 
                 <p class="paper-font-body1">This is my bio site.</p>
@@ -148,41 +150,56 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 <p class="paper-font-body1">Links to my various profiles on other sites below, <br/>and my projects and videos on the sidebar.</p>
               </paper-material>
 
-              <div class="horizontal layout col2">
+              <div class="twoColParent">
                 <paper-material elevation="1" class="flex col-1">
                   <div class="paper-font-body1 center-content">
-                    <img src="./images/g+.png" style="padding-right:8px"/><a href="https://plus.google.com/u/0/111295988877938068140/posts"><paper-button>+Daniel Ciao</paper-button></a>
+                    <img src="./images/g+.png" style="padding-right:8px"/>
+                    <a href="https://plus.google.com/u/0/111295988877938068140/posts">
+                      <paper-button>+Daniel Ciao</paper-button>
+                    </a>
                   </div>
                   <div class="paper-font-body1 center-content">
-                    <img src="./images/twi.png" style="padding-right:8px"/><a href="https://twitter.com/plusCubed"><paper-button>@plusCubed</paper-button></a>
+                    <img src="./images/twi.png" style="padding-right:8px"/>
+                    <a href="https://twitter.com/plusCubed">
+                      <paper-button>@plusCubed</paper-button>
+                    </a>
                   </div>
                 </paper-material>
 
                 <paper-material elevation="1" class="flex col-2">
                   <div class="paper-font-body1 center-content">
-                    <img src="./images/linked.png" style="padding-right:8px"/><a href="http://www.linkedin.com/pub/daniel-ciao/a4/568/b93/"><paper-button>Daniel Ciao</paper-button></a>
+                    <img src="./images/linked.png" style="padding-right:8px"/>
+                    <a href="http://www.linkedin.com/pub/daniel-ciao/a4/568/b93/">
+                      <paper-button>Daniel Ciao</paper-button>
+                    </a>
                   </div>
                   <div class="paper-font-body1 center-content">
-                    <img src="./images/github.png" style="padding-right:8px"/><a href="https://github.com/plusCubed"><paper-button>plusCubed</paper-button></a>
+                    <img src="./images/github.png" style="padding-right:8px"/>
+                    <a href="https://github.com/plusCubed">
+                      <paper-button>plusCubed</paper-button>
+                    </a>
                   </div>
                 </paper-material>
               </div>
 
               <paper-material elevation="1">
                 <div class="paper-font-body1 center-content">
-                  <img src="./images/gmail.png" style="padding-right:8px"/><a href="mailto:plusCubed@gmail.com"><paper-button>plusCubed@gmail.com</paper-button></a><br/>
+                  <img src="./images/gmail.png" style="padding-right:8px"/>
+                  <a href="mailto:plusCubed@gmail.com">
+                    <paper-button>plusCubed@gmail.com</paper-button>
+                  </a><br/>
                 </div>
               </paper-material>
 
             </section>
 
-            <section data-route="apps">
-              <div class="horizontal layout col2">
+            <section data-route="apps" tabindex="-1">
+              <div class="twoColParent">
 
                 <div class="vertical layout flex col-1">
                   <paper-material elevation="1" class="app">
                     <p class="paper-font-title">plusTimer</p>
-                    <img src="./images/plusTimer-feature.png" class="app-feat"></img>
+                    <img src="./images/plusTimer-feature.png" class="app-feat"/>
                     <div class="app-desc paper-font-body1">
                       <p>An Android Rubik's cube solve timer.</p>
                       <p><a href="https://play.google.com/store/apps/details?id=com.pluscubed.plustimer">
@@ -195,7 +212,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
                   <paper-material elevation="1" class="app">
                     <p class="paper-font-title">MatLog</p>
-                    <img src="./images/matlog-feature.png" class="app-feat"></img>
+                    <img src="./images/matlog-feature.png" class="app-feat"/>
                     <div class="app-desc paper-font-body1">
                       <p>A Material Design logcat reader based on Nolan Lawson's CatLog.</p>
                       <p><a href="https://plus.google.com/u/0/communities/108705871773878445106">
@@ -221,7 +238,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
                   <paper-material elevation="1" class="app">
                     <p class="paper-font-title">MaterialOS Icon Pack Dashboard</p>
-                    <img src="./images/materialos-feature.png" class="app-feat"></img>
+                    <img src="./images/materialos-feature.png" class="app-feat"/>
                     <div class="app-desc paper-font-body1">
                       <p>An Android icon pack dashboard for the Material Open Source Project. The project itself aims to be the central place for designers from all over the world to contribute Material Design icons, wallpapers, and more.</p>
                       <p><a href="https://play.google.com/store/apps/details?id=org.materialos.icons">
@@ -240,7 +257,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     <div class="paper-font-title button-title-container">
                       <a class="title-button" href="http://aidanfollestad.com"><paper-button>Aidan Follestad's Projects</paper-button></a>
                     </div>
-                    <img src="./images/cabinet-impression-feature.png" class="app-feat"></img>
+                    <img src="./images/cabinet-impression-feature.png" class="app-feat"/>
                     <div class="app-desc paper-font-body1">
                       <p>I help out with development for some of Aidan's projects, including:</p>
 
@@ -274,7 +291,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
                   <paper-material elevation="1" class="app">
                     <p class="paper-font-title">China Missed Calls</p>
-                    <img src="./images/missed-calls-feature.png" class="app-feat"></img>
+                    <img src="./images/missed-calls-feature.png" class="app-feat"/>
                     <div class="app-desc paper-font-body1">
                       <p>An Android app to view the contact info of phone numbers in missed call SMSes from the China Telecom, Mobile, and Unicom carriers in China.</p>
                       <p><a href="https://play.google.com/store/apps/details?id=com.pluscubed.mishuzhushou">
@@ -300,9 +317,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
             </section>
 
-            <section data-route="videos">
+            <section data-route="videos" tabindex="-1">
 
-              <div class="horizontal layout col2">
+              <div class="twoColParent">
 
                 <div class="vertical layout flex col-1">
                   <paper-material elevation="1" class="app">
@@ -310,7 +327,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     <div class="paper-font-title button-title-container">
                       <a class="title-button" href="https://www.youtube.com/user/screwcontinuityinc"><paper-button>Screw Continuity Film Channel</paper-button></a>
                     </div>
-                    <div class="embed-container"style="">
+                    <div class="embed-container" style="">
                       <iframe class="embed" src="https://www.youtube.com/embed/hiS97OQLXk4" frameborder="0" allowfullscreen></iframe>
                     </div>
                     <div class="app-desc paper-font-body1">
@@ -323,11 +340,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     <div class="paper-font-title button-title-container">
                       <a class="title-button" href="http://www.youtube.com/channel/UCbq6R9YT4Xk1EnBwbyW44Pg"><paper-button>Personal Random Stuff Channel</paper-button></a>
                     </div>
-                    <div class="embed-container"style="">
+                    <div class="embed-container" style="">
                       <iframe class="embed" src="https://www.youtube.com/embed/qXLAD3hWmW0" frameborder="0" allowfullscreen></iframe>
                     </div>
                     <div class="app-desc paper-font-body1">
-                      <p>This video in particular was winner of the Committee's Choice Award of GreenLight Festival 2014. This video was also a collaboration with Zak.</a></p>
+                      <p>This video in particular was winner of the Committee's Choice Award of GreenLight Festival
+                        2014. This video was also a collaboration with Zak.</p>
                     </div>
                   </paper-material>
 
@@ -340,11 +358,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     <div class="paper-font-title button-title-container">
                       <a class="title-button" href="https://www.youtube.com/user/plusCubed/"><paper-button>plusCubed SpeedCubing Channel</paper-button></a>
                     </div>
-                    <div class="embed-container"style="">
+                    <div class="embed-container" style="">
                       <iframe class="embed" src="https://www.youtube.com/embed/5FjLuY1_zMc?list=UUmlYKILzgS5l8geUzkSOF2g" frameborder="0" allowfullscreen></iframe>
                     </div>
                     <div class="app-desc paper-font-body1">
-                      <p>Reviews, solves, etc. on all things Rubik's cubes.</a></p>
+                      <p>Reviews, solves, etc. on all things Rubik's cubes.</p>
                     </div>
                   </paper-material>
 
@@ -353,7 +371,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 
             </section>
-
           </iron-pages>
         </div>
       </paper-scroll-header-panel>
@@ -373,6 +390,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <platinum-sw-register auto-register
                           clients-claim
                           skip-waiting
+                          base-uri="bower_components/platinum-sw/bootstrap"
                           on-service-worker-installed="displayInstalledToast">
       <platinum-sw-cache default-cache-strategy="fastest"
                          cache-config-file="cache-config.json">

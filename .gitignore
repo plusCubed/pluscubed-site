@@ -1,6 +1,8 @@
 dist
 .tmp
 
+.idea
+
 ### Node ###
 # Logs
 logs

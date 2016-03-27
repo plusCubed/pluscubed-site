@@ -59,7 +59,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     var scaleMiddle = Math.max(maxMiddleScale, auxHeight / auxScale + maxMiddleScale);
     var scaleBottom = 1 - yRatio;
 
-    var mainToolbar = document.getElementById('mainToolbar');
+    var mainToolbar = Polymer.dom(document).querySelector('#mainToolbar');
     if (detail.y >= heightDiff) {
       mainToolbar.className += ' shadow-elevation-4dp';
       appName.innerHTML = 'plusCubed - Daniel Ciao';
