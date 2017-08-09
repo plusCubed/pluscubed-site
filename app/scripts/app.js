@@ -48,7 +48,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   window.addEventListener('paper-header-transform', function(e) {
     var appName = Polymer.dom(document).querySelector('#mainToolbar .app-name');
     var middleContainer = Polymer.dom(document).querySelector('#mainToolbar .middle-container');
-    var bottomContainer = Polymer.dom(document).querySelector('#mainToolbar .bottom-container');
     var detail = e.detail;
     var heightDiff = detail.height - detail.condensedHeight;
     var yRatio = Math.min(1, detail.y / heightDiff);
@@ -57,23 +56,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     var auxHeight = heightDiff - detail.y;
     var auxScale = heightDiff / (1 - maxMiddleScale);
     var scaleMiddle = Math.max(maxMiddleScale, auxHeight / auxScale + maxMiddleScale);
-    var scaleBottom = 1 - yRatio;
 
     var mainToolbar = Polymer.dom(document).querySelector('#mainToolbar');
     if (detail.y >= heightDiff) {
       mainToolbar.className += ' shadow-elevation-4dp';
-      appName.innerHTML = 'plusCubed - Daniel Ciao';
     } else {
       mainToolbar.className =
         mainToolbar.className.replace(/(?:^|\s)shadow-elevation-4dp(?!\S)/  , '');
-      appName.innerHTML = 'plusCubed';
     }
 
     // Move/translate middleContainer
     Polymer.Base.transform('translate3d(0,' + yRatio * 100 + '%,0)', middleContainer);
-
-    // Scale bottomContainer and bottom sub title to nothing and back
-    Polymer.Base.transform('scale(' + scaleBottom + ') translateZ(0)', bottomContainer);
 
     // Scale middleContainer appName
     Polymer.Base.transform('scale(' + scaleMiddle + ') translateZ(0)', appName);
